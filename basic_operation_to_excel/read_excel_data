@@ -45,9 +45,9 @@ def test():
 	object_file_name = "test1.xlsx"
 	filepath = os.path.join(document_path, object_file_name)
 	workbook, sheet = get_data_by_name(file_path, "excel_data")
-  data = get_data_list(sheet)
-  for i in data:
-    print(i)
+	data = get_data_list(sheet)
+	for i in data:
+		print(i)
 
 if __name__ == '__main__':
 	test()
