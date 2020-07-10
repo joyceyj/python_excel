@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2020-04-01 16:29:20
+# @Author  : Joyce Yang (joyce3.yang@gmail.com)
+# @Link    : https://github.com/joyceyj
+
+import os
+import sys
+import openpyxl
+
+# 打开Excel文件
+# filepath 文件路径
+def open_excel(filepath):
+	try:
+		data = openpyxl.load_workbook(filepath)
+		return data
+	except IOError:
+		print("no find: " + filepath)
+
+# 根据Sheet名称获取Excel指定表格中的数据
+def get_data_by_name(filepath, sheet_name):
+	file = open_excel(filepath)
+	try:
+		sheet = file[sheet_name]
+		return sheet
+	except IOError:
+		print("no exit: " + sheet_name)
+
+# 复制表格行元组为list
+def row_data_type_change(row):
+	data = []
+	for i in row:
+		data.append(i.value)
+	return data
+
+# 将sheet数据转换为以行为单位的list
+def get_data_list(sheet):
+    data_list = []
+    for row in sheet.rows:
+        data_list.append(row_data_type_change(row))
+    return data_list
+
+def test():
+	document_path = sys.path[0]
+	object_file_name = "test1.xlsx"
+	filepath = os.path.join(document_path, object_file_name)
+	workbook, sheet = get_data_by_name(file_path, "excel_data")
+  data = get_data_list(sheet)
+  for i in data:
+    print(i)
+
+if __name__ == '__main__':
+	test()
